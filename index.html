@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstarp CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+    <!-- Tailwind CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.2/tailwind.min.css"
+      integrity="sha512-RntatPOhEcQEA81gC/esYoCkGkL7AYV7TeTPoU+R9zE44/yWxVvLIBfBSaMu78rhoDd73ZeRHXRJN5+aPEK53Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Metro Dashboard</title>
+  </head>
+  <body>
+    <!-- Add Section Modal -->
+    <div
+      class="modal fade"
+      id="addTemplateModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Section</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            class="modal-body flex flex-col justify-center items-center gap-2"
+          >
+            <button type="button" class="btn btn-primary w-full">
+              ADD SLIDER SECTION
+            </button>
+            <button type="button" class="btn btn-primary w-full">
+              ADD CATEGORIES SECTION
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#specialCategoryModal"
+            >
+              ADD SPECIAL CATEGORIES SECTION
+            </button>
+            <button type="button" class="btn btn-primary w-full">
+              ADD STATIC BANNER SECTION
+            </button>
+            <button type="button" class="btn btn-primary w-full">
+              ADD COLLECTION SECTION
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Categories Section Modal -->
+    <div
+      class="modal fade"
+      id="specialCategoryModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Special Categories Section
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex flex-col gap-2 p-4">
+            <!-- <div>
+              <label for="specialCategoryTitle" class="form-label">Title</label>
+              <input
+                type="text"
+                id="specialCategoryTitle"
+                class="form-control"
+                aria-describedby="specialCategoryTitle"
+              />
+            </div> -->
+            <div>
+              <label for="specialCategoryTitle" class="form-label"
+                >No of Columns</label
+              >
+              <input
+                type="number"
+                id="specialCategoryNo"
+                class="form-control"
+                aria-describedby="specialCategoryNo"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addSpecialCategoriesSec()"
+              type="button"
+              class="btn btn-primary"
+            >
+              Add Section
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Section -->
+    <main id="main" class="w-full flex flex-col justify-center">
+      <!-- Open Add Section Modal Button -->
+      <section>
+        <button onclick="addSection()" class="btn btn-primary m-4">
+          ADD SECTION
+        </button>
+      </section>
+    </main>
+
+    <!-- App -->
+    <script src="app.js"></script>
+
+    <!-- Bootstarp CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
