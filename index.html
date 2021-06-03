@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Bootstarp CDN -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
@@ -19,7 +20,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Metro Dashboard</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Metro</title>
   </head>
   <body>
     <!-- Add Section Modal -->
@@ -44,10 +48,21 @@
           <div
             class="modal-body flex flex-col justify-center items-center gap-2"
           >
-            <button type="button" class="btn btn-primary w-full">
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              onclick="addSlider()"
+              data-bs-dismiss="modal"
+            >
               ADD SLIDER SECTION
             </button>
-            <button type="button" class="btn btn-primary w-full">
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#categoryModal"
+            >
               ADD CATEGORIES SECTION
             </button>
             <button
@@ -59,11 +74,114 @@
             >
               ADD SPECIAL CATEGORIES SECTION
             </button>
-            <button type="button" class="btn btn-primary w-full">
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              onclick="addBanner()"
+              data-bs-dismiss="modal"
+            >
               ADD STATIC BANNER SECTION
             </button>
-            <button type="button" class="btn btn-primary w-full">
-              ADD COLLECTION SECTION
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#mostSoldModal"
+            >
+              ADD MOST SOLD SECTION
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#featuredModal"
+            >
+              ADD FEATURED SECTION
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary w-full"
+              data-bs-dismiss="modal"
+              onclick="addCategories2()"
+            >
+              ADD CATEGORIES 2
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main
+      class="lg:container mx-auto flex flex-col justify-center items-center"
+    >
+      <div class="w-full flex flex-col">
+        <label for="city" class="font-semibold my-2">Select City</label>
+        <select name="city" id="city" class="form-select">
+          <option value="lahore">Lahore</option>
+          <option value="islamabad">Islamabad-Rawalpindi</option>
+          <option value="lahore">Karachi</option>
+          <option value="lahore">Faisalabad</option>
+          <option value="lahore">Other Cities</option>
+          <option value="lahore">Multan</option>
+        </select>
+      </div>
+
+      <button onclick="addSection()" class="btn btn-primary m-4 w-full">
+        ADD SECTION
+      </button>
+    </main>
+
+    <!-- Categories Section Modal -->
+    <div
+      class="modal fade"
+      id="categoryModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Add Categories Section
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex flex-col gap-2 p-4">
+            <div>
+              <label for="specialCategoryTitle" class="form-label"
+                >No of Columns</label
+              >
+              <input
+                type="number"
+                id="categoryNo"
+                class="form-control"
+                aria-describedby="specialCategoryNo"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addCategories()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Add Section
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
             </button>
           </div>
         </div>
@@ -92,15 +210,6 @@
             ></button>
           </div>
           <div class="modal-body flex flex-col gap-2 p-4">
-            <!-- <div>
-              <label for="specialCategoryTitle" class="form-label">Title</label>
-              <input
-                type="text"
-                id="specialCategoryTitle"
-                class="form-control"
-                aria-describedby="specialCategoryTitle"
-              />
-            </div> -->
             <div>
               <label for="specialCategoryTitle" class="form-label"
                 >No of Columns</label
@@ -115,9 +224,10 @@
           </div>
           <div class="modal-footer">
             <button
-              onclick="addSpecialCategoriesSec()"
+              onclick="addSpecialCat()"
               type="button"
               class="btn btn-primary"
+              data-bs-dismiss="modal"
             >
               Add Section
             </button>
@@ -133,15 +243,326 @@
       </div>
     </div>
 
-    <!-- Main Section -->
-    <main id="main" class="w-full flex flex-col justify-center">
-      <!-- Open Add Section Modal Button -->
-      <section>
-        <button onclick="addSection()" class="btn btn-primary m-4">
-          ADD SECTION
-        </button>
-      </section>
-    </main>
+    <!-- Featured Section Modal -->
+    <div
+      class="modal fade"
+      id="featuredModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Featured Section</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex flex-col gap-2 p-4">
+            <div>
+              <label for="specialCategoryTitle" class="form-label"
+                >No of Columns</label
+              >
+              <input
+                type="number"
+                id="featuredNo"
+                class="form-control"
+                aria-describedby="specialCategoryNo"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addFeatured()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Add Section
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Most Sold Section Modal -->
+    <div
+      class="modal fade"
+      id="mostSoldModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Most Sold Section
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex flex-col gap-2 p-4">
+            <div>
+              <label for="specialCategoryTitle" class="form-label"
+                >No of Columns</label
+              >
+              <input
+                type="number"
+                id="mostSoldNo"
+                class="form-control"
+                aria-describedby="specialCategoryNo"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addMostSold()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Add Section
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uplad Image Modal -->
+    <div
+      class="modal fade"
+      id="uploadImage"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog upIm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex justify-center items-center">
+            <label
+              for="uploadImg"
+              class="
+                flex-1 flex flex-col
+                justify-center
+                items-center
+                font-semibold
+              "
+            >
+              <div style="font-size: 5rem">+</div>
+              <div class="pointer-cursor">Upload Image</div>
+              <input
+                type="file"
+                name="uploadImg"
+                id="uploadImg"
+                class="hidden"
+              />
+            </label>
+            <div class="flex-1 flex flex-col gap-2 p-4">
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  aria-describedby="specialCategoryNo"
+                />
+              </div>
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Sort Number</label
+                >
+                <select name="sortNo" id="sortNo" class="form-select">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Sub Banner Sort Number</label
+                >
+                <select name="subBannerNo" id="subBannerNo" class="form-select">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label">Cities</label>
+                <div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Lahore
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Islamabad-Rawalpindi
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Karachi
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Selet Assortment Type</label
+                >
+                <select name="assortment" id="assortment" class="form-select">
+                  <option value="0">Select Assortment Type</option>
+                  <option value="1">Food</option>
+                  <option value="2">Non Food</option>
+                  <option value="3">Appearal</option>
+                </select>
+              </div>
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Select Banner Type</label
+                >
+                <select name="bannerType" id="bannerType" class="form-select">
+                  <option value="0">Select Brand Type</option>
+                  <option value="1">Category</option>
+                  <option value="2">Promotion</option>
+                  <option value="3">Comapign Brand</option>
+                </select>
+              </div>
+              <div>
+                <label for="specialCategoryTitle" class="form-label"
+                  >Category</label
+                >
+                <select name="bannerType" id="bannerType" class="form-select">
+                  <option value="0">Select Category</option>
+                  <option value="1">Promotions</option>
+                  <option value="2">Qurbani</option>
+                  <option value="3">Fresh Food</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addMostSold()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Upload Image
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sort Modal -->
+    <div
+      class="modal fade"
+      id="sortModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body flex flex-col gap-2 p-4">
+            <div>
+              <label for="sortNo" class="form-label">Sort No</label>
+              <input
+                type="number"
+                id="sortNo"
+                class="form-control"
+                aria-describedby="specialCategoryNo"
+              />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addMostSold()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Sort
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- App -->
     <script src="app.js"></script>
